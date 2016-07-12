@@ -23,4 +23,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.0.0'
+    compile("org.springframework.boot:spring-boot-starter-web:1.3.6.RELEASE")
+    compile 'commons-net:commons-net:3.3'
 }
