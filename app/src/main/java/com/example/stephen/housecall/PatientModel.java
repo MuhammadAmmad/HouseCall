@@ -2,18 +2,23 @@ package com.example.stephen.housecall;
 
 import android.content.Context;
 
+import com.cloudant.sync.datastore.ConflictException;
 import com.cloudant.sync.datastore.Datastore;
 import com.cloudant.sync.datastore.DatastoreManager;
 import com.cloudant.sync.datastore.DatastoreNotCreatedException;
 import com.cloudant.sync.datastore.DocumentBodyFactory;
 import com.cloudant.sync.datastore.DocumentException;
 import com.cloudant.sync.datastore.DocumentRevision;
+import com.cloudant.sync.query.IndexManager;
+import com.cloudant.sync.query.QueryResult;
 import com.cloudant.sync.replication.Replicator;
 import com.cloudant.sync.replication.ReplicatorBuilder;
 
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Stephen on 2016-07-24.
@@ -22,6 +27,7 @@ public class PatientModel {
 
     private Datastore mDatastore;
     private final Context mContext;
+    private IndexManager indexManager;
 
     public PatientModel(Context context) {
         this.mContext = context;
@@ -32,9 +38,29 @@ public class PatientModel {
 
         try {
             this.mDatastore = manager.openDatastore("patients");
+            indexManager = new IndexManager(mDatastore);
         } catch(DatastoreNotCreatedException notCreatedException) {
             System.err.println("Problem opening datastore: "+notCreatedException);
         }
+    }
+
+    public Patient findDocument(Patient patient) throws ConflictException {
+        Map<String, Object> query = new HashMap<String, Object>();
+        Map<String, Object> search = new HashMap<String, Object>();
+        search.put("$search", "\"username\"");
+        query.put("$text", search);
+
+        QueryResult result = indexManager.find(query);
+        if (result.size() != 1){
+            System.err.print("query id is not unique");
+            return null;
+        }
+        for (DocumentRevision rev : result) {
+           return  Patient.fromRevision(rev);
+        }
+        System.err.print("did not find patient");
+    return null;
+
     }
 
     public Patient createDocument(Patient p){
