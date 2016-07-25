@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_user">92826306-0970-45ee-9fe1-aaf4416cf421-bluemix</string>
+    <string name="default_dbname">patients</string>
+    <string name="default_api_key">tonezelparramistingempla</string>
+    <string name="default_api_password">c20538934354ad5fa9f8875f355797c1bc478045</string>
+</resources>

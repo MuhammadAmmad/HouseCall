@@ -1,4 +1,4 @@
-package models;
+package com.example.stephen.housecall;
 
 /**
  * Created by Yi on 7/11/2016.

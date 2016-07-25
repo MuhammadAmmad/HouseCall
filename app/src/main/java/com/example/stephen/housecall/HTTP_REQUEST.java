@@ -1,10 +1,12 @@
-package models;
+package com.example.stephen.housecall;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.Authenticator;
 import java.net.HttpURLConnection;
+import java.net.PasswordAuthentication;
 import java.net.URL;
 
 /**
@@ -19,6 +21,12 @@ public class HTTP_REQUEST {
 
     public static String excutePost(String targetURL, String urlParameters) {
         HttpURLConnection connection = null;
+        Authenticator.setDefault (new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("92826306-0970-45ee-9fe1-aaf4416cf421-bluemix", "be907baca4095366d8f7d6dc28d6ce5180d1b1e51b36231152dc4deeba21550d".toCharArray());
+            }
+        });
+
         try {
             //Create connection
             URL url = new URL(targetURL);
@@ -47,7 +55,7 @@ public class HTTP_REQUEST {
             String line;
             while((line = rd.readLine()) != null) {
                 response.append(line);
-                response.append('\r');
+               // response.append('\r');
             }
             rd.close();
             return response.toString();
@@ -63,6 +71,12 @@ public class HTTP_REQUEST {
 
     public static String excuteGet(String targetURL) {
         HttpURLConnection connection = null;
+        Authenticator.setDefault (new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("92826306-0970-45ee-9fe1-aaf4416cf421-bluemix", "be907baca4095366d8f7d6dc28d6ce5180d1b1e51b36231152dc4deeba21550d".toCharArray());
+            }
+        });
+
         try {
             //Create connection
             URL url = new URL(targetURL);
@@ -81,7 +95,7 @@ public class HTTP_REQUEST {
             String line;
             while((line = rd.readLine()) != null) {
                 response.append(line);
-                response.append('\r');
+                //response.append('\r');
             }
             rd.close();
             return response.toString();

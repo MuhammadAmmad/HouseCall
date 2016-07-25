@@ -1,4 +1,4 @@
-package models;
+package com.example.stephen.housecall;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,12 +11,14 @@ import java.io.IOException;
 public class UserControl {
 
 
-    public String createPatient(Patient patient){
+    public static String createPatient(Patient patient){
+
+
 
         ObjectMapper om = new ObjectMapper();
         try{
             String json = om.writeValueAsString(patient);
-            String msg =  HTTP_REQUEST.excutePost("IBMurl", json);
+            String msg =  HTTP_REQUEST.excutePost("https://92826306-0970-45ee-9fe1-aaf4416cf421-bluemix.cloudant.com/patients/_all_docs", json);
             return msg;
 
         } catch (JsonProcessingException e) {
