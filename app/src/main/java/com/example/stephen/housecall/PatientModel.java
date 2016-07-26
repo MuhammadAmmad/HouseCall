@@ -44,22 +44,35 @@ public class PatientModel {
         }
     }
 
-    public Patient findDocument(Patient patient) throws ConflictException {
+    public void findDocument() throws ConflictException {
         Map<String, Object> query = new HashMap<String, Object>();
+        /*
         Map<String, Object> search = new HashMap<String, Object>();
-        search.put("$search", "\"username\"");
+        search.put("$search", "\"user\"");
         query.put("$text", search);
+        */
+        query.put("doc", "7");
 
         QueryResult result = indexManager.find(query);
+
         if (result.size() != 1){
             System.err.print("query id is not unique");
-            return null;
+            return;
+            //return null;
         }
+
+
+        if(result == null){
+            System.out.println("not found");
+            return;
+        }
+
         for (DocumentRevision rev : result) {
-           return  Patient.fromRevision(rev);
+           //return  Patient.fromRevision(rev);
+            System.out.println(rev);
         }
-        System.err.print("did not find patient");
-    return null;
+        //System.err.print("did not find patient");
+    //return null;
 
     }
 
