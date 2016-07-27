@@ -9,7 +9,7 @@ import java.util.Map;
  * Created by Yi on 7/11/2016.
  */
 public class Patient {
-    private String PHN;
+    private String PHN; //carecard number
     private String LAST_NAME;
     private String FIRST_NAME;
     private String DOB; //format in YYYY-MM-DD)
