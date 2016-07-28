@@ -23,11 +23,16 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:support-v4:24.0.0'
     compile 'commons-net:commons-net:3.3'
-    compile (
+    compile 'org.igniterealtime.smack:smack-android:4.1.0-rc1'
+    compile 'org.igniterealtime.smack:smack-tcp:4.1.0-rc1'
+    // optional features
+    compile 'org.igniterealtime.smack:smack-android-extensions:4.1.0-rc1'
+    compile(
             [group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.4.1'],
             [group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.4.1'],
             [group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.4.1']
     )
-    compile group: 'com.cloudant', name: 'cloudant-sync-datastore-android-encryption', version:'latest.release'
+    compile 'com.cloudant:cloudant-sync-datastore-android-encryption:latest.release'
+    compile files('src/main/java/com/example/stephen/housecall/SMS/lib/gson-2.2.4.jar')
 }
 
