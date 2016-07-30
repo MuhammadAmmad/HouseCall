@@ -43,37 +43,30 @@ public class PatientModel {
             System.err.println("Problem opening datastore: "+notCreatedException);
         }
     }
+    //usernames are unique, so this method only expects one result
+    public Patient findDocument(String username) throws ConflictException {
+        Patient p = null;
 
-    public void findDocument() throws ConflictException {
         Map<String, Object> query = new HashMap<String, Object>();
-        /*
-        Map<String, Object> search = new HashMap<String, Object>();
-        search.put("$search", "\"user\"");
-        query.put("$text", search);
-        */
-        query.put("doc", "7");
-
+        query.put("user", username);
         QueryResult result = indexManager.find(query);
 
         if (result.size() != 1){
             System.err.print("query id is not unique");
-            return;
-            //return null;
         }
 
-
-        if(result == null){
-            System.out.println("not found");
-            return;
+        //replace this with a wrong username ui
+        else if(result == null){
+            System.err.println("not found");
         }
 
-        for (DocumentRevision rev : result) {
-           //return  Patient.fromRevision(rev);
-            System.out.println(rev);
+        else {
+            for (DocumentRevision rev : result) {
+                p = Patient.fromRevision(rev);
+            }
         }
-        //System.err.print("did not find patient");
-    //return null;
 
+        return p;
     }
 
     public Patient createDocument(Patient p){
