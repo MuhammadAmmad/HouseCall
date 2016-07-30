@@ -7,6 +7,6 @@ applications:
   host: HouseCall
   disk_quota: 1024M
   services:
-  - HouseCall-AdvancedMobileAccess
-  - HouseCall-imfpush
   - HouseCall-cloudantNoSQLDB
+  - Mobile Client Access-pd
+  - Push Notifications-9a
