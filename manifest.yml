@@ -3,10 +3,10 @@ applications:
   memory: 512M
   instances: 1
   domain: mybluemix.net
-  name: HouseCall
-  host: HouseCall
+  name: HouseCallAndroid
+  host: HouseCallAndroid
   disk_quota: 1024M
   services:
-  - HouseCall-cloudantNoSQLDB
-  - Mobile Client Access-pd
-  - Push Notifications-9a
+  - HouseCallAndroid-AdvancedMobileAccess
+  - HouseCallAndroid-imfpush
+  - HouseCallAndroid-cloudantNoSQLDB
