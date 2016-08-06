@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.stephen.housecall.R;
+import com.example.stephen.housecall.SMS.lib.MyService;
 import com.google.gson.Gson;
 
 import org.jivesoftware.smack.ConnectionConfiguration;
@@ -41,12 +42,12 @@ public class MyXMPP {
     public static XMPPTCPConnection connection;
     public static String loginUser;
     public static String passwordUser;
-    public Gson gson;
-    public Context context;
+    Gson gson;
+    MyService context;
     public static MyXMPP instance = null;
     public static boolean instanceCreated = false;
 
-    public MyXMPP(Context context, String serverAdress, String logiUser,
+    public MyXMPP(MyService context, String serverAdress, String logiUser,
                   String passwordser) {
         this.serverAddress = serverAdress;
         this.loginUser = logiUser;
@@ -56,7 +57,7 @@ public class MyXMPP {
 
     }
 
-    public static MyXMPP getInstance(Context context, String server,
+    public static MyXMPP getInstance(MyService context, String server,
                                      String user, String pass) {
 
         if (instance == null) {
@@ -259,8 +260,8 @@ public class MyXMPP {
             Log.e("xmpp.SendMessage()", "msg Not sent!-Not Connected!");
 
         } catch (Exception e) {
-            Log.e("xmpp.SendMessage() ",
-                    "msg Not sent" + e.getMessage());
+            Log.e("xmpp.SendMessage():",
+                    "msg Not sent!" + e.getMessage());
         }
 
     }
